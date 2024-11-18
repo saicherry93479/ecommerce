@@ -6,7 +6,7 @@ export default function Cart({ cart, setCart, addToWishlist }) {
   console.log("cart ", cart);
   const increaseQuantity = async (id) => {
     try {
-      const resp = await axios.post("http://3.145.32.82/api/cart/add", {
+      const resp = await axios.post("http://3.145.32.82:5000/api/cart/add", {
         productId: id,
         quantity: 1,
       });
@@ -29,7 +29,7 @@ export default function Cart({ cart, setCart, addToWishlist }) {
       removeFromCart(id);
     } else {
       try {
-        await axios.post("http://3.145.32.82/api/cart/add", {
+        await axios.post("http://3.145.32.82:5000/api/cart/add", {
           productId: id,
           quantity: -1,
         });
@@ -47,7 +47,7 @@ export default function Cart({ cart, setCart, addToWishlist }) {
   const removeFromCart = async (id, all = false) => {
     try {
       const resp = await axios.post(
-        `http://3.145.32.82/api/cart/remove/${id}`,
+        `http://3.145.32.82:5000/api/cart/remove/${id}`,
         { removeAll: all }
       );
       console.log("resp ", resp);
@@ -59,7 +59,7 @@ export default function Cart({ cart, setCart, addToWishlist }) {
 
   const moveToWishlist = async (item) => {
     try {
-      await axios.post("http://3.145.32.82/api/wishlist/add", {
+      await axios.post("http://3.145.32.82:5000/api/wishlist/add", {
         productId: item._id,
       });
       removeFromCart(item._id);

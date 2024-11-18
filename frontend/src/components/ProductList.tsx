@@ -21,7 +21,7 @@ export default function ProductList({
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://3.145.32.82/api/products");
+        const response = await axios.get("http://3.145.32.82:5000/api/products");
         console.log("response is ", response);
         setProducts(response.data);
       } catch (error) {
@@ -39,12 +39,12 @@ export default function ProductList({
     try {
       if (isInWishlist(product._id)) {
         await axios.delete(
-          `http://3.145.32.82/api/wishlist/remove/${product._id}`
+          `http://3.145.32.82:5000/api/wishlist/remove/${product._id}`
         );
         setWishlist(wishlist.filter((item) => item._id !== product._id));
       } else {
         await axios.post(
-          `http://3.145.32.82/api/wishlist/add/${product._id}`
+          `http://3.145.32.82:5000/api/wishlist/add/${product._id}`
         );
         setWishlist([...wishlist, product]);
       }
