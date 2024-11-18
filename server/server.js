@@ -33,12 +33,6 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/user', userRoutes);
 
-// Serve static files in production
-if (process.env.NODE_ENV === 'production') {
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'public', 'index.html'));
-    });
-}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
