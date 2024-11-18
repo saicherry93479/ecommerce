@@ -60,8 +60,8 @@ export default function App() {
       if (isAuthenticated) {
         try {
           const [cartRes, wishlistRes] = await Promise.all([
-            axios.get("http://localhost:5000/api/cart"),
-            axios.get("http://localhost:5000/api/wishlist"),
+            axios.get("http://3.145.32.82/api/cart"),
+            axios.get("http://3.145.32.82/api/wishlist"),
           ]);
           setCart(cartRes.data);
           setWishlist(wishlistRes.data);
@@ -89,7 +89,7 @@ export default function App() {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/api/cart/add", {
+      const response = await axios.post("http://3.145.32.82/api/cart/add", {
         productId: product._id,
         quantity: 1,
       });
@@ -105,7 +105,7 @@ export default function App() {
       if (product.quantity > 1) {
       }
       if (increase) {
-        const resp = await axios.post("http://localhost:5000/api/cart/add", {
+        const resp = await axios.post("http://3.145.32.82/api/cart/add", {
           productId: id,
           quantity: 1,
         });
@@ -118,12 +118,12 @@ export default function App() {
       } else {
         if (cart.find((item) => item._id === id).quantity === 1) {
           const resp = await axios.post(
-            `http://localhost:5000/api/cart/remove/${id}`,
+            `http://3.145.32.82/api/cart/remove/${id}`,
             { removeAll: true }
           );
           setCart(cart.filter((item) => item._id !== id));
         } else {
-          await axios.post("http://localhost:5000/api/cart/add", {
+          await axios.post("http://3.145.32.82/api/cart/add", {
             productId: id,
             quantity: -1,
           });
@@ -147,7 +147,7 @@ export default function App() {
   //     removeFromCart(id);
   //   } else {
   //     try {
-  //       await axios.post("http://localhost:5000/api/cart/add", {
+  //       await axios.post("http://3.145.32.82/api/cart/add", {
   //         productId: id,
   //         quantity: -1,
   //       });
@@ -176,7 +176,7 @@ export default function App() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/wishlist/add",
+        "http://3.145.32.82/api/wishlist/add",
         {
           productId: product._id,
         }

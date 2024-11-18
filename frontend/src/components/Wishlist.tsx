@@ -6,7 +6,7 @@ export default function Wishlist({ wishlist, setWishlist, addToCart }) {
   const removeFromWishlist = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/wishlist/remove/${id}`
+        `http://3.145.32.82/api/wishlist/remove/${id}`
       );
       setWishlist(wishlist.filter((item) => item._id !== id));
     } catch (error) {
@@ -16,7 +16,7 @@ export default function Wishlist({ wishlist, setWishlist, addToCart }) {
 
   const moveToCart = async (item) => {
     try {
-      await axios.post("http://localhost:5000/api/cart/add", {
+      await axios.post("http://3.145.32.82/api/cart/add", {
         productId: item._id,
         quantity: 1,
       });

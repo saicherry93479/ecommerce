@@ -40,10 +40,10 @@ export default function ProductDetails({
   const handleWishlistToggle = async () => {
     try {
       if (isInWishlist) {
-        await axios.post('http://localhost:5000/api/wishlist/remove', { productId: product._id });
+        await axios.post('http://3.145.32.82/api/wishlist/remove', { productId: product._id });
         setWishlist(wishlist.filter(item => item._id !== product._id));
       } else {
-        await axios.post('http://localhost:5000/api/wishlist/add', { productId: product._id });
+        await axios.post('http://3.145.32.82/api/wishlist/add', { productId: product._id });
         setWishlist([...wishlist, product]);
       }
     } catch (error) {
