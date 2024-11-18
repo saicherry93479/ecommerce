@@ -2,28 +2,43 @@ version: '3.9'
 
 services:
   frontend:
-    image: saicherry93479/frontend:latest
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
     container_name: frontend
     restart: always
     ports:
       - "5173:5173"
+    volumes:
+      - ../frontend:/app
+      - /app/node_modules
+      - ./node_modules/.vite:/app/node_modules/.vite
     environment:
       - VITE_API_URL=http://localhost:5000
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    command: bun run dev --host
     networks:
       - mongodb_network
 
   backend:
-    image: saicherry93479/backend:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: backend
     restart: always
     ports:
       - "5000:5000"
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
       - PORT=5000
       - MONGODB_URI=mongodb://root:root@mongodb:27017/ecommerce?authSource=admin
-      - JWT_SECRET=${JWT_SECRET}
+      - JWT_SECRET=your-secret-key-here
       - JWT_EXPIRES_IN=24h
+      - CORS_ORIGIN=http://localhost:3000
     depends_on:
       - mongodb
     networks:
@@ -36,6 +51,9 @@ services:
     volumes:
       - mongodb-data:/data/db/
       - mongodb-log:/var/log/mongodb/
+      - ./mongo-init:/docker-entrypoint-initdb.d/
+    env_file:
+      - .env
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
@@ -64,8 +82,13 @@ services:
 
 volumes:
   mongodb-data:
+    driver: local
+    name: mongo-data
   mongodb-log:
+    driver: local
+    name: mongo-log
 
 networks:
   mongodb_network:
     driver: bridge
+    name: mongo-network
