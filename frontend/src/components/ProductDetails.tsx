@@ -20,7 +20,7 @@ export default function ProductDetails({
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://13.233.133.71:500/api/products/${id}`);
+        const response = await axios.get(`http://13.233.133.71:5000/api/products/${id}`);
         console.log('response is ',response)
         setProduct(response.data);
       } catch (error) {
