@@ -18,7 +18,7 @@ export default function Login({ setIsAuthenticated }) {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://3.145.32.82:5000/api/auth/login", formData);
+      const response = await axios.post("http://localhost:5000/api/auth/login", formData);
       console.log('resonse is ',response)
       localStorage.setItem("token", response.data.token);
       setIsAuthenticated(true);
