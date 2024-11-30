@@ -6,7 +6,7 @@ export default function Wishlist({ wishlist, setWishlist, addToCart }) {
   const removeFromWishlist = async (id) => {
     try {
       await axios.delete(
-        `import.meta.env.VITE_API_URL/api/wishlist/remove/${id}`
+        `http://13.233.133.71:5000/api/wishlist/remove/${id}`
       );
       setWishlist(wishlist.filter((item) => item._id !== id));
     } catch (error) {
@@ -16,7 +16,7 @@ export default function Wishlist({ wishlist, setWishlist, addToCart }) {
 
   const moveToCart = async (item) => {
     try {
-      await axios.post("import.meta.env.VITE_API_URL/api/cart/add", {
+      await axios.post("http://13.233.133.71:5000/api/cart/add", {
         productId: item._id,
         quantity: 1,
       });

@@ -48,7 +48,7 @@ export default function Register() {
     
     setLoading(true);
     try {
-      await axios.post('import.meta.env.VITE_API_URL/api/auth/register', {
+      await axios.post('http://13.233.133.71:5000/api/auth/register', {
         name: formData.name,
         email: formData.email,
         password: formData.password

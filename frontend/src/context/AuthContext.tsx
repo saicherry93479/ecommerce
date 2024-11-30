@@ -45,7 +45,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       // Verify token with backend
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      const response = await axios.get('import.meta.env.VITE_API_URL/api/auth/verify');
+      const response = await axios.get('http://13.233.133.71:5000/api/auth/verify');
       
       setUser(response.data.user);
       setIsAuthenticated(true);

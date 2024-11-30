@@ -13,7 +13,7 @@ export const useAuth = () => {
             if (token) {
                 try {
                     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                    const response = await axios.get('import.meta.env.VITE_API_URL/api/user/profile');
+                    const response = await axios.get('http://13.233.133.71:5000/api/user/profile');
                     setUser(response.data);
                     setIsAuthenticated(true);
                 } catch (error) {
@@ -29,7 +29,7 @@ export const useAuth = () => {
 
     const login = async (email, password) => {
         try {
-            const response = await axios.post('import.meta.env.VITE_API_URL/api/auth/login', { email, password });
+            const response = await axios.post('http://13.233.133.71:5000/api/auth/login', { email, password });
             const { token, user } = response.data;
             localStorage.setItem('token', token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -46,7 +46,7 @@ export const useAuth = () => {
 
     const register = async (userData) => {
         try {
-            const response = await axios.post('import.meta.env.VITE_API_URL/api/auth/register', userData);
+            const response = await axios.post('http://13.233.133.71:5000/api/auth/register', userData);
             return { success: true };
         } catch (error) {
             return {
