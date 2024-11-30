@@ -20,7 +20,7 @@ export default function Profile({ setIsAuthenticated }) {
   const fetchUserData = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/user/profile', {
+      const response = await axios.get('import.meta.env.VITE_API_URL/api/user/profile', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUser(response.data);
@@ -42,7 +42,7 @@ export default function Profile({ setIsAuthenticated }) {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.put('http://localhost:5000/api/user/profile', formData, {
+      const response = await axios.put('import.meta.env.VITE_API_URL/api/user/profile', formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUser(response.data);
